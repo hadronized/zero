@@ -18,9 +18,15 @@ maintainer:          Dimitri Sabadie <dimitri.sabadie@gmail.com>
 copyright:           Dimitri Sabadie
 category:            Data
 extra-source-files:  CHANGELOG.md
+homepage:            https://github.com/phaazon/zero
+bug-reports:         https://github.com/phaazon/zero/issues
 
 build-type:          Simple
 cabal-version:       >= 1.10
+
+source-repository head
+  type:     git
+  location: https://github.com/phaazon/zero.git
 
 library
   ghc-options:         -W -Wall
