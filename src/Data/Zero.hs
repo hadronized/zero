@@ -51,6 +51,15 @@ instance (Num a) => Semigroup (Product a) where
 instance (Num a) => Zero (Product a) where
   zero = Product 0
 
+-- |'Zero' under boolean logical or.
+newtype Any = Any { getAny :: Bool } deriving (Bounded,Eq,Generic,Ord,Read,Show)
+
+instance Semigroup Any where
+  Any a <> Any b = Any $ a || b
+
+instance Zero Any where
+  zero = Any True
+
 -- |'Zero' under boolean logical and.
 newtype All = All { getAll :: Bool} deriving (Bounded,Eq,Generic,Ord,Read,Show)
 
@@ -70,3 +79,11 @@ instance (Semigroup a) => Semigroup (Success a) where
 
 instance (Semigroup a) => Zero (Success a) where
   zero = Success Nothing
+
+-- |A successful value.
+success :: a -> Success a
+success = Success . Just
+
+-- |A failure.
+failure :: Success a
+failure = Success Nothing

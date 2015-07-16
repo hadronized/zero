@@ -1,5 +1,5 @@
 name:                zero
-version:             0.1
+version:             0.1.1
 synopsis:            Semigroups with absorption
 description:         'Monoid' is a 'Semigroup' glued with a neutral element
                      called 'mempty'. In the same idea, 'Zero' is a 'Semigroup'
