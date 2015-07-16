@@ -8,11 +8,23 @@
 -- Portability : portable
 -----------------------------------------------------------------------------
 
-module Data.Zero where
+module Data.Zero (
+    -- * Semigroups with absorbing element
+    Zero(..)
+    -- * Num wrappers
+  , Product(..)
+    -- * Boolean wrappers
+  , Any(..)
+  , All(..)
+    -- * Maybe wrappers
+  , Success(..)
+  , success
+  , failure
+  ) where
 
 import Control.Monad.Fix ( MonadFix )
+import Data.Monoid ( All(..), Any(..), Product(..) )
 import Data.Semigroup ( Semigroup(..) )
-import GHC.Generics ( Generic )
 
 -- |'Semigroup' with a 'zero' element. It’s important to understand that the
 -- standard 'Semigroup' types – i.e. 'Maybe' and so on – are already biased,
@@ -20,7 +32,7 @@ import GHC.Generics ( Generic )
 --
 -- Should satisfies the following laws:
 --
--- ==== Annhilation
+-- ==== Annihilation
 --
 -- @ a '<>' 'zero' = 'zero' '<>' a = 'zero' @
 --
@@ -41,35 +53,22 @@ class (Semigroup a) => Zero a where
 instance Zero () where
   zero = ()
 
--- |'Zero' under multiplication.
-newtype Product a = Product { getProduct :: a }
-  deriving (Bounded,Eq,Generic,Num,Ord,Read,Show)
-
-instance (Num a) => Semigroup (Product a) where
-  Product a <> Product b = Product $ a * b
-
 instance (Num a) => Zero (Product a) where
   zero = Product 0
 
--- |'Zero' under boolean logical or.
-newtype Any = Any { getAny :: Bool } deriving (Bounded,Eq,Generic,Ord,Read,Show)
-
-instance Semigroup Any where
-  Any a <> Any b = Any $ a || b
-
 instance Zero Any where
   zero = Any True
-
--- |'Zero' under boolean logical and.
-newtype All = All { getAll :: Bool} deriving (Bounded,Eq,Generic,Ord,Read,Show)
-
-instance Semigroup All where
-  All a <> All b = All $ a && b
 
 instance Zero All where
   zero = All False
 
 -- |'Zero' for 'Maybe'.
+--
+-- Called 'Success' because of the absorbing law:
+--
+-- @
+--   'Success' ('Just' a) '<>' 'Success' 'Nothing' = 'Nothing'
+-- @
 newtype Success a = Success { getSuccess :: Maybe a }
   deriving (Applicative,Eq,Foldable,Functor,Monad,MonadFix,Ord,Traversable,Read,Show)
 

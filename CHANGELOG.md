@@ -1,3 +1,8 @@
+## 0.1.2
+
+- Replace hard-coded wrappers by Data.Monoid’s ones.
+- Fixed typo.
+
 ## 0.1.1
 
 - Added Any.
