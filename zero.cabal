@@ -1,5 +1,5 @@
 name:                zero
-version:             0.1.2
+version:             0.1.3
 synopsis:            Semigroups with absorption
 description:         'Monoid' is a 'Semigroup' glued with a neutral element
                      called 'mempty'. In the same idea, 'Zero' is a 'Semigroup'
@@ -39,7 +39,7 @@ library
                      , GeneralizedNewtypeDeriving
 
   build-depends:       base       >= 4.8  && < 4.9
-                     , semigroups >= 0.16 && < 0.17
+                     , semigroups >= 0.16 && < 0.18
 
   hs-source-dirs:      src
 
