@@ -1,3 +1,7 @@
+### 0.1.3.1
+
+- semigrous-0.18 support.
+
 ## 0.1.3
 
 - semigroups-0.17 support.
