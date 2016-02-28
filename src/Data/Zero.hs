@@ -76,6 +76,10 @@ instance (Semigroup a) => Semigroup (Success a) where
   Success (Just a) <> Success (Just b) = Success . Just $ a <> b
   _ <> _ = zero
 
+instance (Semigroup a, Monoid a) => Monoid (Success a) where
+  mempty = success mempty
+  mappend = (<>)
+
 instance (Semigroup a) => Zero (Success a) where
   zero = Success Nothing
 
