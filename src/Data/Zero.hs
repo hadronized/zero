@@ -45,7 +45,7 @@ class (Semigroup a) => Zero a where
   -- |Concat all the elements according to ('<>') and 'zero'.
   zconcat :: [a] -> a
 
-  default zconcat :: (Semigroup a) => [a] -> a
+  default zconcat :: [a] -> a
   zconcat [] = zero
   zconcat (x:xs) = foldr (<>) x xs
   {-# MINIMAL zero #-}
