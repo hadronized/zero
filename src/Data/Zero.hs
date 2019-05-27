@@ -53,6 +53,9 @@ class (Semigroup a) => Zero a where
 instance Zero () where
   zero = ()
 
+instance Zero b => Zero (a -> b) where
+  zero _ = zero
+
 instance (Num a) => Zero (Product a) where
   zero = Product 0
 
